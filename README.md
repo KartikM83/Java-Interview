@@ -8,6 +8,8 @@ so the bytecode can be created on any system that makes java platform independen
 **2. What is JVM?**
 the JVM stand for java virtual machine it is responsible for loading,  verifying and executing the bytecode
 
+---
+
 **3. What is JIT ?**
 - JIT is a Just in time compilation.  This technique is used by the JVM to improve the performance  of the java program
 
