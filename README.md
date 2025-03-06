@@ -351,4 +351,361 @@ An **object-based programming language** is a programming language that **suppor
 
 ---
 
+### 35. How is the ‘new’ operator different from the ‘newInstance()’ operator in Java?
+
+the new operator is used to create objects, but if we want to decide the type of object to be created at runtime, there is no way we can use the new operator. In this case, we have to use the newInstance() method
+
+---
+
+### **36. What are Classes in Java?**
+
+A **class** in Java is a blueprint or template for creating objects. It defines the **state** (variables) and **behavior** (methods) that objects of the class will have.
+
+---
+
+### 37. What is the difference between static (class) method and instance method?
+
+
+
+| Features | **Static Method** | **Instance Method** |
+|----------|----------|----------|
+| **Belongs To** | Static method is belong to the class not to specific object.  | Instance method Belongs to an object of the class.  |
+| **Declared with** |  It Is Define Using Static Keyword. | Not define with the Static keyword |
+| **Access to variables and Method** | Static methods can access only static variable and method of the class.  | Instance method can access both **static** and **instance** variables and method of class |
+| **Invocation** | Static methods can be called using the class name only without creating an instance of a class. | The instance methods can be called on a specific instance of a class using the object reference.|
+| **Access to `this`** | Static methods do not have access to ****this**** keyword | Instance methods have access to ****this**** keyword|
+| **Overridden** |Static methods cannot be overridden because they are resolved at compile time, not at run time. | Instance methods can be overridden because they are resolved at run time, not at compile time|
+
+
+----
+### 38. What is this keyword in Java?
+‘this’ is a keyword used to reference a variable that refers to the current object.
+
+----
+### 39. What are Access Specifiers and Types of Access Specifiers?
+
+Access Specifiers in use to restrict the scope of a class, constructor, variable, method, or data member. There are four types of Access Specifiers in Java mentioned below:
+
+1.  **Public -** The code is accessible for all classes
+2.  **Private -** The code is only accessible within the declared class
+3.  **Protected -** The code is accessible in the same package and **subclasses**. You will learn more about subclasses and superclasses.
+4.  **Default -** The code is only accessible in the same package. This is used when you don't specify a modifier.
+
+---
+### 40. What will be the initial value of an object reference which is defined as an instance variable?
+
+The initial value of an object reference which is defined as an instance variable is a NULL value.
+
+---
+### 41. What is an object?
+Object is a instance of class and it an entity that as state and behavior.
+
+---
+### 42. What are the different ways to create objects in Java?
+1.  Using new keyword
+2.  Using new instance
+3.  Using clone() method
+```java
+class Car implements Cloneable {
+    String model;
+
+    Car(String model) {
+        this.model = model;
+    }
+
+    void display() {
+        System.out.println("Car model: " + model);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();  // Using Object's clone method
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        // Creating an object and then cloning it
+        Car originalCar = new Car("Ford");
+        Car clonedCar = (Car) originalCar.clone();
+        
+        clonedCar.display();  // Outputs: Car model: Ford
+    }
+}
+```
+
+4.  Using deserialization
+5.  Using the newInstance() method of the Constructor class
+
+---
+### 43. What is the constructor?
+
+Constructor is a special method that is used to initialize objects. Constructor is called when a object is created. The name of constructor is same as of the class.
+
+```java
+// Class Created  
+class XYZ{  
+ private int val;  
+    
+ // Constructor  
+ public XYZ(){  
+ val=0;  
+ }  
+};
+```
+
+---
+### 44. What happens if you don’t provide a constructor in a class?
+if you don’t provide a constructor in a class in java, the compiler automatically generates the default constructor with no arguments.
+
+---
+
+### 45. How many types of constructors are used in Java?
+**1. Default Constructor:** 
+
+ - Default Constructor is a constructor that does not accept any parameter .
+ - It initializes the object with default values. (0,null)
+```java class MyClass {
+    int number;
+
+    // Default constructor
+    MyClass() {
+        number = 0;  // Initialize with default value
+    }
+}
+```
+
+**2 Parameterized Constructor**
+
+- A constructor that accepts one or more parameters.
+- It allows the initialization of an object with specific values passed at the time of object creation.
+```java
+class MyClass {
+    int number;
+
+    // Parameterized constructor
+    MyClass(int num) {
+        number = num;  // Initialize with the provided value
+    }
+}
+```
+---
+### 46. What is the purpose of a default constructor?
+The default constructor is useful for creating objects with initial default values,
+
+--- 
+
+### 47. Where and how can you use a private constructor?
+1. **Singleton Design Pattern**
+-   **Purpose:** The most common use of a private constructor is in the **Singleton pattern**, which ensures that only **one instance** of a class is created throughout the application's lifecycle.
+-   **How it works:** The constructor is private so that the class cannot be instantiated from outside the class. Instead, the instance is created internally within the class and accessed via a **public static method**.
+```java
+class Singleton {
+    // The single instance of the class
+    private static Singleton instance;
+    
+    // Private constructor prevents instantiation from outside the class
+    private Singleton() {
+        // Initialization code here
+    }
+    
+    // Public method to provide access to the instance
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Access the Singleton instance
+        Singleton obj = Singleton.getInstance();
+    }
+}
+```
+**Explanation:** The `Singleton` class can only be instantiated via the `getInstance()` method, and the constructor is private to ensure only one instance is created.
+
+---
+
+### 48. What are the differences between the constructors and methods?
+
+**constructors** 
+
+ - A constructor is used to **initialize** an object when it is created.
+ - constructor **must have the same name** as the class
+ - A constructor **does not have a return type**
+ - A constructor is **invoked automatically** when a new object of the class is created using the `new` keyword.
+ - Not inherited, but can call parent constructor using `super()`
+
+**Method**
+
+ - methods can be called multiple times during the life of an object.
+ - A method can have any name
+ - A method **must have a return type**,
+ - A method is **called explicitly** on an object after the object has been created.
+ - Inherited and can be overridden
+
+---
+### 49. What is an Interface?
+- A interface is a blueprint of class which has abstract method, static method with no body  and  constant. it is used to specify a **contract** or **set of capabilities** that a class can implement 
+- It does not have constructor
+
+**Some Point keep in mind**
+---
+**Abstract Methods**:
+An interface typically contains abstract methods (methods without a body), which must be implemented by any class that implements the interface.
+
+```java
+interface Animal {
+    void sound(); // abstract method
+}
+
+```
+**Multiple Inheritance**:
+Java allows a class to implement multiple interfaces, which is a way to achieve multiple inheritance (as Java doesn’t support multiple inheritance through classes).
+
+```java
+interface Animal {
+    void sound();
+}
+
+interface Mammal {
+    void walk();
+}
+
+class Dog implements Animal, Mammal {
+    public void sound() {
+        System.out.println("Bark");
+    }
+    public void walk() {
+        System.out.println("Dog is walking");
+    }
+}
+```
+**Constants**:
+All variables declared inside an interface are implicitly `public`, `static`, and `final` (constant). They must be initialized when declared.
+```java
+interface Animal {
+    int MAX_AGE = 100; // This is implicitly public, static, and final
+}
+```
+### Example
+```java
+// Define the interface (Blueprint)
+interface Animal {
+    // Abstract method (no implementation)
+    void sound();  // Each animal must have a sound method
+    
+    void eat();    // Each animal must have an eat method
+}
+
+// Class Dog implementing the Animal interface
+class Dog implements Animal {
+    @Override
+    public void sound() {
+        System.out.println("Bark");
+    }
+    
+    @Override
+    public void eat() {
+        System.out.println("Dog is eating");
+    }
+}
+
+// Class Cat implementing the Animal interface
+class Cat implements Animal {
+    @Override
+    public void sound() {
+        System.out.println("Meow");
+    }
+    
+    @Override
+    public void eat() {
+        System.out.println("Cat is eating");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Polymorphism: Animal reference can point to different object types
+        Animal dog = new Dog();
+        Animal cat = new Cat();
+        
+        dog.sound();  // Outputs: Bark
+        dog.eat();    // Outputs: Dog is eating
+        
+        cat.sound();  // Outputs: Meow
+        cat.eat();    // Outputs: Cat is eating
+    }
+}
+```
+
+----
+### 50. Give some features of the Interface. why use java interface
+- Used to achieve abstraction.
+- By interface we can support the functionality if multiple inheritance
+-   It is also used to achieve loose coupling.
+---
+### 51. What is a marker interface?
+
+An Interface is recognized as an empty interface (no field or methods) it is called a marker interface. Examples of marker interfaces are Serializable, Cloneable, and Remote interfaces.
+
+---
+### 52. What are the differences between abstract class and interface?
+
+| **Aspect**                                   | **Abstract Class**                             | **Interface Class**                           |
+|----------------------------------------------|------------------------------------------------|-----------------------------------------------|
+| **Methods**                                  | Both abstract and non-abstract methods may be found in an abstract class. | The interface contains only abstract methods. |
+| **Final Methods**                            | Abstract class supports final methods.         | Interface class does not support final methods.|
+| **Multiple Inheritance**                     | Multiple inheritance is **not** supported by the Abstract class. | Multiple inheritance is **supported** by Interface Class. |
+| **Keyword**                                  | `abstract` keyword is used to declare an abstract class. | `interface` keyword is used to declare the interface class. |
+| **Extending/Implementing**                   | `extend` keyword is used to extend an Abstract Class. | `implements` keyword is used to implement the interface. |
+| **Members Visibility**                       | Abstract class can have members like `protected`, `private`, etc. | All class members are `public` by default in an interface. |
+
+
+---
+### 53. What do you mean by data encapsulation?
+Encapsulation means wrapping a data and information under a single unit.
+
+---
+### 54. What are the advantages of Encapsulation in Java?
+ **1. Data Hiding (Access Control)**
+ Data hiding means hiding the internal data within the class to prevent it direct access form the outside the class
+```java
+class Person {
+    private String name; // private field (encapsulated)
+    
+    // Getter method
+    public String getName() {
+        return name;
+    }
+    
+    // Setter method
+    public void setName(String name) {
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }
+    }
+}
+
+
+```
+Here, the `name` field is **private**, and it cannot be directly accessed from outside the `Person` class. Instead, we control access via the **getter** and **setter** methods.
+
+**2. Improved Maintainability**:
+
+When you encapsulate data within a class, any changes to the internal workings (implementation details) of the class do not affect other parts of the program. As long as the public interface remains the same (the getters and setters), you can modify the internal implementation without worrying about breaking other code that uses the class.
+
+**3. Increased Flexibility and Reusability**:
+
+Encapsulation makes it easier to change or extend the functionality of a class. Since the implementation is hidden from the outside, you can modify it without disrupting other parts of the application. Additionally, classes that use encapsulation are more reusable because the internal behavior is abstracted away.
+
+**4. Control Over Data**:
+
+hrough encapsulation, you can control how data is accessed and modified. For example, you can include validation logic in setters to ensure that only valid data is assigned to a variable. This ensures that the object is always in a valid state.
+
+---
+
 	
