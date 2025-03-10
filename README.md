@@ -707,5 +707,387 @@ Encapsulation makes it easier to change or extend the functionality of a class. 
 hrough encapsulation, you can control how data is accessed and modified. For example, you can include validation logic in setters to ensure that only valid data is assigned to a variable. This ensures that the object is always in a valid state.
 
 ---
+### 55. What is the primary benefit of Encapsulation?
 
+The primary benefit of  **Encapsulation** in Java is its ability to **protect the internal data** from unauthorized access and modification. By hiding the implementation details of a class and only exposing a public interface (via methods like getters and setters), it ensures that the internal state of an object cannot be directly manipulated from outside the class.
+
+
+---
+### 56. Define Inheritance.
+Inheritance is a concept in which the child class inherited all the properties and characteristic from parent class
+
+---
+### 57. What are the different types of inheritance in Java?
+
+Inheritance is the method by which the Child class can inherit the features of the Super or Parent class. In Java, Inheritance is of four types:
+
+-   ****Single Inheritance:**** when a subclass inherits from a single superclass this is called single inheritance . This is the most common type of inheritance in Java.
+```java
+class Animal {
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("The dog barks.");
+    }
+}
+```
+
+-   ****Multilevel Inheritance:**** When a class is derived from another derived class, creating a chain of inheritance is called as Multilevel Inheritance So, a subclass can inherit from another subclass.
+```java
+class Animal {
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("The dog barks.");
+    }
+}
+
+class Puppy extends Dog {
+    void play() {
+        System.out.println("The puppy plays.");
+    }
+}
+```
+
+-   ****Hierarchical Inheritance:**** When multiple subclasses derive from the same parent class is known as Hierarchical Inheritance. In other words, a class that has a single parent has many subclasses.
+```java
+class Animal {
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("The dog barks.");
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("The cat meows.");
+    }
+}
+```
+
+-   ****Multiple Inheritance:**** When a child class inherits from multiple parent classes is known as Multiple Inheritance. In Java, it only supports multiple inheritance of interfaces, not classes.
+```java
+interface Animal {
+    void eat();
+}
+
+interface Pet {
+    void play();
+}
+
+class Dog implements Animal, Pet {
+    public void eat() {
+        System.out.println("The dog eats.");
+    }
+    
+    public void play() {
+        System.out.println("The dog plays.");
+    }
+}
+```
+
+---
+### 58. What is multiple inheritance? Is it supported by Java?
+
+Multiple inheritance is a concept in which a child class inherits from multiple parent classes is known as Multiple Inheritance. 
+
+**No**, **Java does not support multiple inheritance** with **classes**. This is done to avoid Confusion and complexity, such as the **diamond problem**, where a class inherits from two classes that have a method with the same name, leading to confusion over which method the subclass should use.
+
+---
+### 59. How is inheritance in C++ different from Java?
+**1. C++**
+- C++ support multiple inheritances. 
+
+- In C++ by default access modifier of the class is private but while inheritance you can change the access modifier of the inherited member using public, private, protected.
+- Constructors are **not inherited** in C++. 
+- When a class is created in C++, it doesn’t inherit from the object class, instead exists on its own.
+
+**2. Java**
+- Java doesn’t support multiple inheritances.
+
+- In java by default access modifier of the class is private and Inheritance in Java follows the same principle as C++ but has more restricted default behaviors, especially with respect to **protected** and **private** access.
+- In Java, the **constructor of the parent class** is called **automatically** by the constructor of the subclass. If the parent class has a constructor with parameters, you must explicitly call it using `super()`.
+
+- Java is always said to have a single inheritance as all the classes inherit in one or the other way from the object class.
+
+---
+### 60. Is there any limitation to using Inheritance?
+
+Yes, there is a limitation of using Inheritance in Java, as because of inheritance one can inherit everything from super class and interface because of which subclass is too clustered and sometimes error-prone when dynamic overriding or dynamic overloading is done in certain situations.
+
+---
+### 61. What is an association?
+
+The association is a relation between two separate classes established through their Objects. It represents Has-A’s relationship.
+
+
+---
+
+### 62. What do you mean by aggregation?
+
+Aggregation is a type of relationship between two classes in Object-Oriented Programming (OOP) that represents a **'has-a'** relationship. It is considered a more specialized version of association and typically denotes that one class **contains** or **owns** references to objects of another class.
+
+For example, consider a **Library** class and a **Book** class. The **Library** can contain multiple **Books**, but if the library is deleted, the books can still exist independently.
+
+```java
+// Book class represents the part
+class Book {
+    private String title;
+
+    public Book(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+}
+
+// Library class represents the whole
+class Library {
+    private String name;
+    private List<Book> books;
+
+    public Library(String name) {
+        this.name = name;
+        this.books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void showBooks() {
+        System.out.println("Books in " + name + " Library:");
+        for (Book book : books) {
+            System.out.println(book.getTitle());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create Books
+        Book book1 = new Book("Java Programming");
+        Book book2 = new Book("Data Structures");
+
+        // Create Library and add Books
+        Library library = new Library("City Library");
+        library.addBook(book1);
+        library.addBook(book2);
+
+        // Show books in the library
+        library.showBooks();
+    }
+}
+```
+
+---
+
+### 63. What is the ‘IS-A ‘ relationship in OOPs Java?
+
+‘IS-A’ is a type of relationship in OOPs Java where one class inherits another class.
+
+
+
+---
+
+### 64. What is the composition of Java?
+
+Composition implies a relationship where the child ****cannot exist independently**** of the parent. For example Human heart, the heart doesn’t exist separately from a Human.
+
+---
+### 65. State the difference between Composition and Aggregation.
+
+| **Aspect**                       | **Aggregation**                                         | **Composition**                                       |
+|----------------------------------|--------------------------------------------------------|------------------------------------------------------|
+| **Relationship**                 | Defines a “has a” relationship between the objects.    | Represents the part-of relationship.                 |
+| **Object Dependency**            | Objects are independent of each other.                 | Objects are dependent on each other.                 |
+| **Representation**               | Represented by using an empty diamond (◯).             | Represented by using a filled diamond (♦).           |
+| **Lifetime of Child Objects**    | Child objects don’t have a lifetime.                   | Child objects have a lifetime.         
+| **Ownership**                 | Weaker ownership; parent object does not own the child object    | Strong ownership; parent object owns the child object                |
+| **Existence**            | Child object can exist independently and be shared            | Child object exists as long as the parent exists          |
+| **Example**               | Library has Books (Books can exist outside the Library)            | Human has a Heart (Heart cannot exist without Human)   |
+               
+----
+
+### 66. Can the constructor be inherited?
+
+No, we can’t inherit a constructor.
+
+---
+
+### 67. What is Polymorphism?
+Polymorphism is same entity ( Function and Object ) behaves different in different scenarios 
+
+----
+
+### 68. What is runtime polymorphism or dynamic method dispatch?
+
+**Runtime Polymorphism** (also called **Dynamic Method Dispatch**) is a concept in object-oriented programming where the method to be invoked is determined at **runtime** based on the **object type**, not the reference type.
+
+This is achieved through **method overriding**, where a subclass provides its own implementation of a method already defined in its superclass.
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal();  // Animal reference, Animal object
+        Animal myDog = new Dog();         // Animal reference, Dog object
+        Animal myCat = new Cat();         // Animal reference, Cat object
+
+        myAnimal.sound();  // Output: Animal makes a sound
+        myDog.sound();     // Output: Dog barks
+        myCat.sound();     // Output: Cat meows
+    }
+}
+```
+
+----
+### 69. What is method overriding?
+
+**Method Overriding** is a feature in Java that allows a **subclass** to provide a **specific implementation** of a method that is already defined in its **superclass**, with the **same method signature** (method name, return type, and parameters). This is a form of **run-time polymorphism** because the method to be called is determined at **run time** based on object type
+
+---
+
+### 70. What is method overloading?
+
+method overloading is feature in java that allow you define the multiple  method with same name but  different parameters.  This is a form of **compile-time polymorphism** because the method to be called is determined at **compile time**
+
+In Method overloading compared to the parent argument, the child argument will get the highest priority.
+
+```java
+class Calculator {
+    // Method to add two integers
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    // Overloaded method to add three integers
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Overloaded method to add two doubles
+    double add(double a, double b) {
+        return a + b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+
+        // Calling overloaded methods
+        System.out.println(calc.add(5, 10));        // Calls add(int, int)
+        System.out.println(calc.add(5, 10, 15));    // Calls add(int, int, int)
+        System.out.println(calc.add(5.5, 10.5));    // Calls add(double, double)
+    }
+}
+```
+
+
+----
+
+### 71. Can we override the static method?
+
+No,  because **Static methods** are associated with the **class** rather than instances of the class (objects). They are resolved at **compile time** based on the reference type, not at runtime.
+
+**Method Overriding** occurs at runtime and involves an instance method in a subclass with the same signature as the method in the superclass. Static methods, however, do not follow the same behavior because they are not bound to instances of the class.
+
+
+### **Why can't static methods be overridden?**
+
+-   Static methods are **hidden**, not overridden. If you declare a static method in a subclass with the same signature as a static method in the superclass, the method in the subclass does not override the method in the superclass but instead **hides** it. This is called **method hiding**.
+
+-   The method that gets executed when you call a static method depends on the **reference type**, not the object type.
+
+```java
+class Parent {
+    // Static method in the parent class
+    static void staticMethod() {
+        System.out.println("Parent's static method");
+    }
+}
+
+class Child extends Parent {
+    // Static method in the child class
+    static void staticMethod() {
+        System.out.println("Child's static method");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent p = new Parent();
+        Parent c = new Child();  // Reference type is Parent, but object is Child
+
+        p.staticMethod();  // Output: Parent's static method
+        c.staticMethod();  // Output: Parent's static method, not Child's
+    }
+}
+
+```
+---
+### 72. Can we override the overloaded method?
+
+Yes, we override the overloaded method
+
+---
+
+### 73. Can we overload the main() method?
+
+Yes However, like any other method in Java, you can overload the `main()` method by providing different parameter lists. The method name (`main`) remains the same, but you can define multiple versions of the method with different parameters.
+
+---
+
+### 74. What are method overloading and method overriding?
+
+****Method Overloading:**** It is also known as Compile Time Polymorphism. In method overloading two or more methods are shared in the same class with a different signature.
+
+****Method Overriding:**** Method Overriding occurs when a subclass can provide the implementation of a method which is already defined in the parent class or superclass. The return type, name and arguments must be similar to the methods in superclass.
+
+| **Aspect**                               | **Method Overloading**                                         | **Method Overriding**                                       |
+|------------------------------------------|---------------------------------------------------------------|------------------------------------------------------------|
+| **Definition**                           | When two or multiple methods are in the same class with different parameters but the same name. | When a subclass provides its own implementation of a method that is already defined in the parent class. |
+| **Inheritance**                          | Method overloading can only happen in the same class or between a subclass and a parent class. | Method overriding can only happen in a subclass.            |
+| **Error Detection**                      | When an error occurs, it is caught at compile time.            | When an error occurs, it is caught at runtime.              |
+| **Polymorphism Type**                    | Example of Compile Time Polymorphism.                          | Example of Run Time Polymorphism.                           |
+| **Inheritance Requirement**              | Method overloading may or may not require inheritance.         | Method overriding always needs inheritance.                 |
+| **Location**                              | It occurs within the class.                                   | It is performed in two classes with an inheritance relationship. |
+
+
+---
 	
