@@ -29,6 +29,7 @@ the JVM stand for java virtual machine it is responsible for loading,  verifying
 
 ### 5. What is a classloader?
 Classloader is the part of Java Runtime Environment during the execution of the bytecode the  classloader is responsible for dynamically loading the java classes and interfaces to JVM  Because of classloaders Java run time system does not need to know about files and file systems.
+
  ✅ Types of ClassLoaders: 
  - 1️⃣ Bootstrap ClassLoader – Loads core Java classes from the `rt.jar` (runtime jar)
  - 2️⃣ Extension ClassLoader – Loads Java extension libraries 
