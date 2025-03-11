@@ -50,6 +50,28 @@ JDK stands for Java Development Kit which provides the environment to develop an
 A string pool is a place i  heap in which all the string defined in the program are stored and there is a separate place in stack in which the variable is store that pointing the string value .
 
 ---
+### What is the difference between Stack and Heap memory?
+"Stack is used for storing local variables and method calls, while Heap is used for storing objects and class instances. Stack is faster and managed by the JVM, whereas Heap is slower and managed by the Garbage Collector. Stack memory is short-lived, whereas Heap memory exists until GC removes unused objects. If Stack overflows, it throws StackOverflowError; if Heap is full, it throws OutOfMemoryError."
+
+```java
+class Example {
+    static int x = 10;  // Stored in Method Area (not Stack/Heap)
+
+    void method() {
+        int a = 5;  // Stored in Stack
+        String str = new String("Hello");  // `str` (reference) in Stack, but object in Heap
+    }
+
+    public static void main(String[] args) {
+        Example obj = new Example();  // obj reference in Stack, object in Heap
+        obj.method();  // Stack frame created for method()
+    }
+}
+```
+
+
+
+
 
 ### 9. What is the Wrapper class in Java?
 Wrapper class in java is a class that provides a way to use primitive data types as a object. Java provides wrapper class for every primitive data types allowing them to treated as object in the situation where the object is needed such as Arraylist.
