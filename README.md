@@ -1331,4 +1331,297 @@ public class ReadOnlyArrayList {
 ```
 
 ---
+
+
+### 85. What is a priority queue in Java?
+A **PriorityQueue** in Java is a special type of queue where **elements are ordered based on priority** rather than the order in which they were added.
+
+By default, it works as a Min-Heap (smallest element first), but we can use a Comparator to make it a Max-Heap.
+
+Does NOT allow `null` values and it is not thread safe
+
+---
+
+**3️⃣ Example 1: Default (Min-Heap) PriorityQueue**
+```java
+import java.util.PriorityQueue;
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(); // Min-Heap (default)
+
+        pq.add(40);
+        pq.add(10);
+        pq.add(30);
+        pq.add(20);
+
+        System.out.println("Priority Queue: " + pq); // Order is unpredictable
+        System.out.println("Top Element (poll): " + pq.poll()); // Removes 10 (smallest)
+        System.out.println("Top Element (peek): " + pq.peek()); // Shows 20 (new smallest)
+    }
+}
+
+
+```
+
+**Output**
+```java
+Priority Queue: [10, 20, 30, 40]
+Top Element (poll): 10
+Top Element (peek): 20
+```
+
+
+**4️⃣ Example 2: Max-Heap PriorityQueue (Using Comparator)**
+
+```java
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder()); // Max-Heap
+
+        maxHeap.add(40);
+        maxHeap.add(10);
+        maxHeap.add(30);
+        maxHeap.add(20);
+
+        System.out.println("Max-Heap Priority Queue: " + maxHeap);
+        System.out.println("Top Element (poll): " + maxHeap.poll()); // Removes 40 (largest)
+    }
+}
+```
+**Output**
+```java
+Max-Heap Priority Queue: [40, 20, 30, 10]
+Top Element (poll): 40
+```
+
+**5️⃣ Example 3: Custom Comparator (Sorting Strings by Length)**
+```java
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(String::length));
+
+        pq.add("Apple");
+        pq.add("Banana");
+        pq.add("Kiwi");
+        pq.add("Orange");
+
+        while (!pq.isEmpty()) {
+            System.out.println(pq.poll()); // Smallest length first
+        }
+    }
+}
+```
+**Output:**
+```java
+Kiwi
+Apple
+Banana
+Orange
+```
+
+---
+
+
+### **86. When to Use PriorityQueue?**
+
+📌 **Use PriorityQueue when you need efficient retrieval of the smallest/largest element.**
+
+-   Dijkstra’s Algorithm (Shortest Path)
+-   Task Scheduling
+-   Top K Elements
+-   Huffman Coding (Data Compression)
+---
+
+### **87. How does PriorityQueue maintain order?**
+
+It uses a **binary heap (Min-Heap by default)** for ordering elements.
+
+---
+
+### **88. What is the difference between a PriorityQueue and a normal Queue?**
+
+
+| **Feature**                    | **PriorityQueue**                                   | **Normal Queue (LinkedList, ArrayDeque, etc.)**   |
+|---------------------------------|-----------------------------------------------------|----------------------------------------------------|
+| **Ordering**                    | Elements are stored based on priority (default: Min-Heap) | Elements follow FIFO (First-In-First-Out)         |
+| **Sorting**                     | Uses a binary heap internally (Min-Heap or Max-Heap) | No sorting, elements are processed in the order they were added |
+| **Time Complexity (poll/remove)**| O(log N) (because of heap structure)                | O(1)                                               |
+| **Time Complexity (insert/add)**| O(log N)                                            | O(1)                                               |
+| **Usage**                       | Used when priority matters (e.g., Dijkstra’s algorithm, scheduling) | Used for simple sequential processing             |
+
+
+---
+
+### **89. How to create a Max-Heap in Java?**
+Use `PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());`
+
+
+---
+
+## 🔥 LinkedList Question:
+
+### 90. Explain the LinkedList class.
+LinkedList class is Java that uses a doubly linked list to store elements. It inherits the AbstractList class and implements List and Deque interfaces.
+
+It allows **fast insertion and deletion** but is **slower for accessing elements** compared to `ArrayList`. LinkedList store the element as a node
+
+---
+
+📌 **Key Features:**  
+✅ Implements **List**, **Queue**, and **Deque** interfaces.  
+✅ Elements are stored as **nodes (each has data + two references: prev & next)**.  
+✅ **Faster insertion/deletion (O(1))** but **slower random access (O(n))**.
+✅ LinkedList classes are non-synchronized.
+✅ Maintains insertion order
+
+---
+
+#### **6️⃣ When to Use LinkedList?**
+
+📌 **Use LinkedList when:**  
+✔️ You need **frequent insertions/deletions** in the middle.  
+✔️ You don't need **fast random access**.  
+✔️ You are implementing **stacks, queues, or deques**.
+
+📌 **Avoid LinkedList when:**  
+❌ You need **fast searching (use ArrayList instead)**.  
+❌ You have **memory constraints (it uses more memory due to extra pointers)**.
+
+---
+
+**LinkedList Example (Basic Operations)**
+
+```java
+import java.util.LinkedList;
+
+class LinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        // Add elements
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        // Add at first and last
+        list.addFirst("Mango");
+        list.addLast("Orange");
+
+        // Remove elements
+        list.remove("Banana");  // Removes "Banana"
+        list.removeFirst();  // Removes "Mango"
+        list.removeLast();   // Removes "Orange"
+
+        // Get elements
+        System.out.println(list.get(0));  // Output: Apple
+    }
+}
+
+```
+
+### 90. How is LinkedList Different from ArrayList?
+
+
+| Feature                   | ArrayList| LinkedList (Queue)        | 
+|---------------------------|---------------------------|---------------------------
+| **Storage**               | ArrayList use daynamic array to store the element| LinkedList used double linked list to store the element
+| **Storage Location** | In ArrayList, Elements are stored in contiguous memory locations               |LinkedList Elements are stored in non-contiguous memory locations as each element has a reference to the next and previous elements.                     
+| **Accessing time**  | ArrayLists are faster for random access. And take time O(1)                | LinkedList is slower for random access than arraylist ans take time O(n)             
+| **Insertiom and deletion time**  | ArrayList are slower for insertion and deletion operations take time O(n)               | LinkedLists are faster for insertion and deletion operations take time O(1)
+| **Memory Usage**  | Less memory is used.              | More memory is used.
+| **Type Of data**  | It is used to store only similar types of data            | It is used to store any types of data.
+
+
+### 91. How Does LinkedList Work Internally?
+LinkedList is used to store the element meaning each node as a data, previous pointer and next pointer
+
+
+---
+
+## Stack In Java
+
+### 91. What is the Stack class in Java
+
+The `Stack` class in Java is a **Last In, First Out (LIFO)** data structure provided in the `java.util` package. It extends `Vector` and provides methods for **pushing, popping, peeking, and searching** elements.
+
+-   ****push():**** pushes an item onto the top of the stack
+-   ****pop():**** removes and returns the top item from the stack
+-  ****peek():**** returns the top item from the stack without removing it.
+- ****search():**** Returns the position of an element (1-based index from top), or `-1` if not found
+
+**How to use Stack ?**
+```java
+import java.util.Stack;
+
+public class StackExample {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+
+        // Pushing elements onto the stack
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        System.out.println("Stack: " + stack);  // Output: [10, 20, 30]
+
+        // Peeking the top element
+        System.out.println("Top element: " + stack.peek());  // Output: 30
+
+        // Popping an element (removes last inserted element)
+        System.out.println("Popped element: " + stack.pop());  // Output: 30
+
+        // Checking if stack is empty
+        System.out.println("Is stack empty? " + stack.empty());  // Output: false
+
+        // Searching for an element (returns 1-based position from top)
+        System.out.println("Position of 10: " + stack.search(10));  // Output: 2
+    }
+}
+
+```
+
+### **🔹 Key Features of Stack Class**
+
+✅ Follows **LIFO (Last In, First Out)** principle  
+✅ Inherits from `Vector` (so it's **synchronized** by default)  
+✅ Provides methods like `push()`, `pop()`, `peek()`, `empty()`, and `search()`
+
+
+### **🔹 When to Use Stack in Java?**
+
+📌 When implementing **Undo/Redo** functionality  
+📌 When solving **Balanced Parentheses** problems (`{[()]}`)  
+📌 In **Depth-First Search (DFS)** algorithms  
+📌 When implementing **Backtracking** (e.g., Sudoku solver)
+
+
+### 92.  What is Difference between stack and queue?
+| Feature                   | Stack| Queue       | 
+|---------------------------|---------------------------|---------------------------
+| **Order**               | It follows the last in first out order(LIFO)| It follows the first in first out order|
+| **Order of Operations**               | The last insert element is remove first| The first insert element is remove first|
+| **Thread Safety**               | I Stack is synchronized (because it extends `Vector`)| `Queue` is not synchronized|
+| **Use case**               | Stack is generally used to solve problems related to recursion. | Queue is generally used to solve problems related to sequential processing.|
+| **Insertion Method**               | push(E item)| `add(E item)` or `offer(E item)`|
+
+---
+
+### 93. Is Stack class thread-safe?
+
+-   Yes, because it extends `Vector`, which is synchronized.
+-   But for better performance, use `Deque` (from `ArrayDeque`) instead of `Stack`.
+
+### 94. What is an alternative to Stack in Java?
+
+-   Use `Deque<Integer> stack = new ArrayDeque<>();` (better performance).
+
+---
+
 	
