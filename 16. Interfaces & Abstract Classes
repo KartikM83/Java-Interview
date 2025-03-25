@@ -1,0 +1,76 @@
+### 1. What is an Interface?
+- A interface is a blueprint of class which has abstract method, static method with no body  and  constant. it is used to specify a **contract** or **set of capabilities** that a class can implement 
+- It does not have constructor
+---
+
+### 2. Give some features of the Interface. why use java interface
+- Used to achieve abstraction.
+- By interface we can support the functionality if multiple inheritance
+-   It is also used to achieve loose coupling.
+
+
+---
+### 3. What is a marker interface?
+
+An Interface is recognized as an empty interface (no field or methods) it is called a marker interface. Examples of marker interfaces are Serializable, Cloneable, and Remote interfaces.
+
+---
+### 4. What are the differences between abstract class and interface?
+
+| **Aspect**                                   | **Abstract Class**                             | **Interface Class**                           |
+|----------------------------------------------|------------------------------------------------|-----------------------------------------------|
+| **Methods**                                  | abstract class contains both abstract and  non-abstract method  | The interface contains only abstract methods. |
+| **Final Methods**                            | Abstract class supports final methods.         | Interface class does not support final methods.|
+| **Multiple Inheritance**                     | Multiple inheritance is **supported** by Abstract Class | Multiple inheritance is **supported** by Interface Class. |
+| **Keyword**                                  | `abstract` keyword is used to declare an abstract class. | `interface` keyword is used to declare the interface class. |
+| **Extending/Implementing**                   | `extend` keyword is used to extend an Abstract Class. | `implements` keyword is used to implement the interface. |
+| **Members Visibility**                       | Abstract class can have members like `protected`, `private`, etc. | All class members are `public` by default in an interface. |
+
+
+---
+
+### 5. What Is Decoupling
+Decoupling, in simple terms, means separating or disconnecting two things that were once closely linked or dependent on each other.
+
+```java
+// Define the interface
+interface PaymentMethod {
+    void pay(double amount);
+}
+
+// Implement the interface in a CreditCard class
+class CreditCard implements PaymentMethod {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using Credit Card.");
+    }
+}
+
+// Implement the interface in a PayPal class
+class PayPal implements PaymentMethod {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using PayPal.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PaymentMethod payment = new CreditCard();
+        payment.pay(100.50);  // Using Credit Card
+        
+        payment = new PayPal();
+        payment.pay(200.75);  // Using PayPal
+    }
+}
+```
+
+**Explanation**:
+
+-   `PaymentMethod` is an interface. The `CreditCard` and `PayPal` classes implement it.
+-   The client can use `PaymentMethod` without caring about the specific type of payment method being used.
+
+
+
+
+
